@@ -19,14 +19,10 @@ route.get('/register', isNotLoggedIn, (req, res) => {
 
 route.post('/register', (req, res) => {
     const { email, name, surname, password, confirmpassword } = req.body;
-    req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'A valid email is required').isEmail();
-    req.checkBody('name', 'Name is required').notEmpty();
     req.checkBody('name', 'Name only letters').matches(/^[a-zA-Z]+$/, "i");
-    req.checkBody('surname', 'Surname is required').notEmpty();
     req.checkBody('surname', 'Surname only letters').matches(/^[a-zA-Z]+$/, "i");
     req.checkBody('password', 'Password use 5 or more characters').matches(/^[a-zA-Z0-9]{5,100}$/, "i");
-    req.checkBody('confirmpassword', 'Confirm Password is required').notEmpty();
     req.checkBody('password', 'Passwords do not match').equals(confirmpassword);
 
     const errors = req.validationErrors();
