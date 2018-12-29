@@ -1,0 +1,33 @@
+<div class="container py-4">
+    <div class="row">
+        {{#each books}}
+        <div class="col-md-3 my-auto">
+            <div class="card mb-4 text-center">
+                <div class="card-header bg-dark text-center">
+                    <a target="_blank" href="{{url}}">
+                        <h3 class="card-title text-white">
+                            {{title}}
+                        </h3>
+                    </a>
+                    <a href="/books/edit/{{id}}" class="btn btn-info"><i class="far fa-edit"></i></a>
+                </div>
+                <div class="card-body">
+                    <p class="m-2">{{description}}</p>
+                    <p>{{timeago date}}</p>
+                    <form action="/books/delete/{{id}}?_method=DELETE" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <button type="submit" class="btn btn-danger btn-block">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+                <p>There is no favorite book yet</p>
+                <a href="/books/add" class="card-link">save one</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
